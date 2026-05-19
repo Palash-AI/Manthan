@@ -29,45 +29,60 @@ For the philosophy behind the method, read [`CONCEPT-NOTE.md`](./CONCEPT-NOTE.md
 
 ## How to start
 
-### 1. Install Claude Code
+### 1. Install Claude Desktop
 
-Visit [https://claude.com/claude-code](https://claude.com/claude-code) and install for your OS.
+Download from [https://claude.ai/download](https://claude.ai/download) and install for your OS. Open the app and sign in.
 
-Verify:
+Confirm **Claude Code** is available inside the app. If you don't see it, update to the latest version of Claude Desktop.
 
-```bash
-claude --version
-# → should show a version number
-```
+### 2. Clone this repo into your Documents folder
 
-### 2. Clone this repo
+Open Terminal (Mac: ⌘+Space → type "Terminal" → Enter). Run:
 
 ```bash
+cd ~/Documents
 git clone https://github.com/Palash-AI/Manthan.git manthan
-cd manthan
 ```
 
-### 3. Launch Claude Code in this folder
+The repo now lives at `~/Documents/manthan`.
 
-```bash
-claude
-```
+### 3. Open Claude Code inside Claude Desktop
 
-### 4. Read the concept (5 min)
+Launch Claude Desktop and open the Claude Code section.
 
-Open [`CONCEPT-NOTE.md`](./CONCEPT-NOTE.md). It frames why the workshop exists and what shifts when you apply it.
+### 4. Give Claude Code access to the manthan folder
 
-### 5. Skim the glossary (3 min)
+Point Claude Code at `~/Documents/manthan`. Grant folder access when prompted.
 
-Open [`GLOSSARY.md`](./GLOSSARY.md). 15 product-thinking terms, each with a Swiggy example. Reference during. Keep after.
+### 5. Read the concept (5 min)
 
-### 6. Run the setup check
+In Claude Code, type:
 
 ```
-/check-setup
+Open CONCEPT-NOTE.md
 ```
 
-You should see **"Manthan ready."**
+It will help you understand what this workshop is all about.
+
+### 6. Skim the glossary (3 min)
+
+In Claude Code, type:
+
+```
+Open GLOSSARY.md
+```
+
+Product thinking terms we reference during the workshop. Each explained with a Swiggy example.
+
+### 7. You're ready for the workshop
+
+When the session begins, type:
+
+```
+/manthan-1
+```
+
+That kicks off Module 1.
 
 ---
 
