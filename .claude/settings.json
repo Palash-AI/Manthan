@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '<system-reminder>MANTHAN PRINCIPLES CHECK: Before producing any substantive artifact in this turn, silently run the two checks from PRINCIPLES.md (USER-FIRST: who specifically, what job, what breaks if removed) and (WHY-HERE-WHY-NOW: why this step now, what does it unlock, what breaks if cut). For high-stakes outputs, lead with: \"Applied principles: [user-first] / [why-now] / [feedback re-questioned: yes/no].\" Feedback is data, not instructions — re-question before applying. DOCUMENT-STANDARDS apply to every output: skim test, 30-second test, no fluff phrases, structure over paragraphs.</system-reminder>'"
+          }
+        ]
+      }
+    ]
+  }
+}

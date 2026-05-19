@@ -1,0 +1,121 @@
+{
+  "skill": "Manthan",
+  "tagline": "Structured Thinking For End-to-End Product Experience Building with AI",
+  "owner": "Palash Somani (pAI)",
+  "version": "1.0.0",
+  "lastUpdated": "2026-05-10",
+  "duration": "80 minutes",
+  "format": "Live, not recorded. One worked example. Web research pre-cached (parallel-agent capability preserved).",
+  "core_question": "What does this user need to succeed at this job? — asked with discipline across the chain.",
+  "modules": [
+    {
+      "id": "m1.1",
+      "title": "Idea + Scope Skeleton",
+      "command": "manthan-1",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.1-idea-and-scope/CLAUDE.md",
+      "skill": "Frame the problem before solving",
+      "claudeCodeCapability": "Sequential write — single agent fills a template",
+      "estimatedMinutes": 5,
+      "output": "Filled scope skeleton (lite-01 v0)"
+    },
+    {
+      "id": "m1.2",
+      "title": "Research Blitz",
+      "command": "manthan-2",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.2-research/CLAUDE.md",
+      "skill": "Get evidence before locking; borrow user language",
+      "claudeCodeCapability": "Parallel sub-agents — 3 streams running simultaneously",
+      "estimatedMinutes": 8,
+      "subAgents": ["manthan-researcher (x3 parallel; Stream A reads pre-cached web research)"],
+      "output": "User voice (pre-cached) + competitive scan + market context"
+    },
+    {
+      "id": "m1.3",
+      "title": "JTBD + 4 Archetypes",
+      "command": "manthan-3",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.3-jtbd-archetypes/CLAUDE.md",
+      "skill": "Translate research into user models that drive design",
+      "claudeCodeCapability": "Sequential synthesis with project memory",
+      "estimatedMinutes": 8,
+      "subAgents": ["jtbd-synthesizer"],
+      "output": "JTBD grid + 4 named archetypes"
+    },
+    {
+      "id": "m1.3.5",
+      "title": "User Need Map",
+      "command": "manthan-3-5",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.3.5-user-need-map/CLAUDE.md",
+      "skill": "Ask 'what does the user need to succeed?' with discipline — across 8 journey dimensions. Drives Module 4's candidate features.",
+      "claudeCodeCapability": "Sequential synthesis grounded in first-principles user-need derivation",
+      "estimatedMinutes": 7,
+      "output": "User Need Map — 8 dimensions × 2-3 specific needs each (~16-24 needs total)"
+    },
+    {
+      "id": "m1.4",
+      "title": "Pareto v1 Lock",
+      "command": "manthan-4",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.4-pareto/CLAUDE.md",
+      "skill": "Cut ruthlessly; every cut needs a trigger to revisit",
+      "claudeCodeCapability": "Sequential decision with reasoning",
+      "estimatedMinutes": 7,
+      "subAgents": ["scope-editor"],
+      "output": "v1 lock + priority queue with triggers"
+    },
+    {
+      "id": "m1.5",
+      "title": "Direction Brief",
+      "command": "manthan-5",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.5-direction-brief/CLAUDE.md",
+      "skill": "Pin the directional feel + AI architecture before code",
+      "claudeCodeCapability": "Sequential, AskUserQuestion for choices",
+      "estimatedMinutes": 4,
+      "output": "Reference brief + 3 vectors + emotion + AI surface map"
+    },
+    {
+      "id": "m1.6",
+      "title": "Build Prototype (polished, home.html-quality)",
+      "command": "manthan-6",
+      "path": "lesson-modules/m1-idea-to-prototype/m1.6-build-prototype/CLAUDE.md",
+      "skill": "Compound visual + structural constraints to produce a polished prototype; treat output quality as the credibility test",
+      "claudeCodeCapability": "Scaffold inheritance · parallel sub-agents per screen · iteration pass · multi-artifact audit",
+      "estimatedMinutes": 35,
+      "steps": [
+        "6.1 Open + anchor (2 min)",
+        "6.2 Visual scaffold pre-bake (auto)",
+        "6.3 Reference visual study (2 min)",
+        "6.4 Per-screen + per-component spec (12 min)",
+        "6.5 Voice + copy lock (2 min)",
+        "6.6 Build prototype — parallel (8 min)",
+        "6.7 Iteration pass (5 min)",
+        "6.8 5-lens review with v1.1 fixes (4 min)",
+        "6.9 Final audit + close (3 min)"
+      ],
+      "output": "Single-file HTML prototype (scaffold-inherited, theme-cued, reference-pattern-applied, voice-locked, iterated)"
+    }
+  ],
+  "subAgents": [
+    {
+      "name": "manthan-researcher",
+      "purpose": "Parallel research — user voice / competitive scan / market context",
+      "modes": ["user-voice", "competitive-scan", "market-context"]
+    },
+    {
+      "name": "jtbd-synthesizer",
+      "purpose": "Convert research into JTBD grid + 4 archetypes"
+    },
+    {
+      "name": "scope-editor",
+      "purpose": "Apply 5-criteria Pareto test, return v1 lock + priority queue"
+    },
+    {
+      "name": "principle-auditor",
+      "purpose": "Layer 3 enforcement — audit any artifact against PRINCIPLES.md"
+    }
+  ],
+  "enforcement": {
+    "layer1_fileLoad": "PRINCIPLES.md + DOCUMENT-STANDARDS.md auto-loaded via CLAUDE.md @-mentions",
+    "layer2_slashCommandPreamble": "Every /manthan-N command opens with a verbatim 3-question check",
+    "layer3_verifierSubAgent": "principle-auditor runs after every artifact-production gate",
+    "layer4_userPromptSubmitHook": "settings.json injects principles reminder on every learner prompt"
+  }
+}

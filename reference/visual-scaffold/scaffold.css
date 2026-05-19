@@ -1,0 +1,876 @@
+/* =================================================================
+   Manthan Visual Scaffold
+   ----------------------
+   A premium-feel CSS foundation that any Manthan Module 6 prototype
+   inherits. Bakes in ~60% of the visual quality decisions so the
+   build agents focus on layout, content, and behaviour — not on
+   reinventing typography, spacing, shadows, or animation utilities.
+
+   Authored from reverse-engineering of home.html (Seekho Companion
+   prototype, 14+ design passes). Reused on every Manthan run.
+
+   How to use in a build:
+   1. <link> or @import this file as the FIRST stylesheet.
+   2. Set <body data-theme="..."> to one of the theme presets below
+      based on the direction brief's reference (Module 5).
+   3. Build screens INSIDE the .phone wrapper. The wrapper makes the
+      output look like an iOS-style app screenshot from minute one.
+   4. Use the design-token custom properties (--accent, --bg-card,
+      --text-primary, etc.) instead of hard-coding colours.
+   ================================================================= */
+
+
+/* ---------- Reset + base ---------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: var(--font-stack);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* ---------- Theme presets ----------
+   The reference brief (Module 5) picks ONE of these. Build agents
+   set <body data-theme="..."> accordingly. Each preset shifts the
+   visual feel without changing structure.
+   ----------------------------------- */
+
+/* Base tokens (apply to all themes) */
+:root {
+  /* Typography */
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                "Helvetica Neue", system-ui, "Noto Sans Devanagari",
+                sans-serif;
+  --font-display: "Georgia", "Iowan Old Style", serif;
+
+  /* Type scale (modular, mobile-first) */
+  --t-xs:   11px;  /* tiny labels, microcopy */
+  --t-sm:   13px;  /* body small, metadata */
+  --t-md:   14px;  /* body */
+  --t-base: 15px;  /* default reading */
+  --t-lg:   17px;  /* card titles, fold titles */
+  --t-xl:   22px;  /* hero titles */
+  --t-2xl:  28px;  /* primary hero */
+
+  /* Line height */
+  --lh-tight:   1.2;
+  --lh-snug:    1.35;
+  --lh-base:    1.5;
+  --lh-relaxed: 1.6;
+
+  /* Spacing scale (4-based) */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-7:  32px;
+  --s-8:  40px;
+
+  /* Radius scale */
+  --r-sm:    8px;
+  --r-md:    12px;
+  --r-lg:    16px;
+  --r-xl:    18px;
+  --r-2xl:   24px;
+  --r-pill:  999px;
+  --r-phone: 36px;
+
+  /* Shadows */
+  --shadow-soft:   0 2px 8px rgba(0,0,0,0.06);
+  --shadow-card:   0 6px 20px rgba(0,0,0,0.08);
+  --shadow-hover:  0 10px 28px rgba(0,0,0,0.12);
+  --shadow-bezel:  0 24px 60px rgba(0,0,0,0.45),
+                   0 0 0 8px #1a1a1a,
+                   0 0 0 9px #2a2a2a;
+
+  /* Transitions */
+  --t-fast:   140ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-base:   220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow:   340ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Default theme (Notion-like — calm, restrained, cream-warm) */
+  --bg-page:        #faf7f0;
+  --bg-card:        #ffffff;
+  --bg-card-soft:   #f5f1ea;
+  --bg-elevated:    #ffffff;
+
+  --text-primary:   #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted:     #6b6b6b;
+  --text-inverse:   #ffffff;
+  --text-on-accent: #ffffff;
+
+  --accent:         #1E4A3B;   /* forest green */
+  --accent-soft:    #D4E9DD;
+  --accent-strong:  #0E3328;
+  --highlight:      #F5C842;   /* warm yellow */
+
+  --border-soft:    rgba(0,0,0,0.06);
+  --border-medium:  rgba(0,0,0,0.12);
+
+  --success:        #1E7B4F;
+  --warning:        #C77800;
+  --error:          #B5453B;
+}
+
+/* Theme: Duolingo-like — warm, gamified, friendly */
+[data-theme="duolingo-like"] {
+  --bg-page:        #FFFCF5;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #FFF6D5;
+
+  --accent:         #58CC02;
+  --accent-soft:    #DDFFB3;
+  --accent-strong:  #46A302;
+  --highlight:      #FFC800;
+
+  --shadow-card:    0 4px 0 rgba(0,0,0,0.10),
+                    0 6px 20px rgba(255, 200, 0, 0.15);
+}
+
+/* Theme: Notion-like — restrained, calm, dense */
+[data-theme="notion-like"] {
+  --bg-page:        #F7F6F3;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #EFEDE7;
+
+  --accent:         #2E2E2E;
+  --accent-soft:    #E8E7E3;
+  --accent-strong:  #000000;
+  --highlight:      #FFD666;
+}
+
+/* Theme: Linear-like — precise, cool, dark-tinged-light */
+[data-theme="linear-like"] {
+  --bg-page:        #FAFAFA;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #F4F4F5;
+
+  --text-primary:   #18181B;
+  --text-secondary: #3F3F46;
+  --text-muted:     #71717A;
+
+  --accent:         #5E6AD2;
+  --accent-soft:    #E5E7FB;
+  --accent-strong:  #3F47B0;
+  --highlight:      #5E6AD2;
+
+  --border-soft:    rgba(0,0,0,0.06);
+  --border-medium:  rgba(0,0,0,0.10);
+
+  --r-lg: 12px;  /* Linear uses slightly tighter radii */
+  --r-xl: 14px;
+}
+
+/* Theme: Khan-Academy-like — earned progression, blue, mastery-coded */
+[data-theme="khan-like"] {
+  --bg-page:        #F4F8FC;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #E5EFF9;
+
+  --accent:         #1865F2;
+  --accent-soft:    #D2E3FB;
+  --accent-strong:  #0E4DBF;
+  --highlight:      #FFA631;
+}
+
+/* Theme: Substack-like — warmth, serif, whitespace */
+[data-theme="substack-like"] {
+  --bg-page:        #FFFBF5;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #FAF1E1;
+
+  --accent:         #FF6719;
+  --accent-soft:    #FFE3CC;
+  --accent-strong:  #D9540F;
+  --highlight:      #FF6719;
+
+  --font-stack:     "Iowan Old Style", "Charter", Georgia, serif;
+}
+
+/* Theme: Headspace-like — calm, pastel, breathing */
+[data-theme="headspace-like"] {
+  --bg-page:        #FFF6E6;
+  --bg-card:        #FFFFFF;
+  --bg-card-soft:   #FCE9CC;
+
+  --accent:         #F47D31;
+  --accent-soft:    #FFE0CB;
+  --accent-strong:  #D9621A;
+  --highlight:      #FFCC4A;
+}
+
+
+/* ---------- Phone-frame wrapper ----------
+   The single highest-leverage visual treatment. Wrapping any HTML
+   inside .phone makes it look like an iOS app screenshot. This
+   alone closes ~30% of the "looks polished" gap.
+   ----------------------------------------- */
+
+.phone {
+  width: 100%;
+  max-width: 390px;
+  height: 844px;
+  margin: 0 auto;
+  background: var(--bg-page);
+  border-radius: var(--r-phone);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-bezel);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 420px) {
+  body { padding: 0; }
+  .phone {
+    max-width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+
+/* ---------- Header pattern ---------- */
+
+.hdr {
+  flex-shrink: 0;
+  padding: 14px 18px 12px;
+  background: var(--bg-page);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.hdr .brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--t-xl);
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.hdr .hdr-right {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+
+/* ---------- Scroll body ---------- */
+
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: var(--s-7);
+  scrollbar-width: thin;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.fold {
+  padding: var(--s-4) var(--s-5);
+}
+
+.fold-title {
+  font-size: var(--t-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--s-1);
+  letter-spacing: -0.2px;
+  line-height: var(--lh-tight);
+}
+
+.fold-sub {
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  margin: 0 0 var(--s-4);
+  line-height: var(--lh-base);
+}
+
+
+/* ---------- Card primitives ---------- */
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--r-xl);
+  padding: var(--s-4);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card.is-tappable {
+  cursor: pointer;
+}
+
+.card.is-tappable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card.is-tappable:active {
+  transform: translateY(0);
+}
+
+/* Gradient card — for hero / wedge moments */
+.card.is-hero {
+  background: linear-gradient(135deg,
+              var(--accent-soft) 0%,
+              color-mix(in srgb, var(--accent-soft) 60%, var(--accent) 10%) 100%);
+  padding: var(--s-5);
+  border-radius: var(--r-2xl);
+}
+
+.card.is-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top right,
+              rgba(255,255,255,0.4) 0%,
+              transparent 60%);
+  pointer-events: none;
+}
+
+.card-title {
+  font-size: var(--t-lg);
+  font-weight: 700;
+  margin: 0 0 var(--s-1);
+  line-height: var(--lh-tight);
+}
+
+.card-body {
+  font-size: var(--t-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--s-3);
+  line-height: var(--lh-base);
+}
+
+
+/* ---------- Button primitives ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  font-family: inherit;
+  font-size: var(--t-md);
+  font-weight: 600;
+  line-height: 1;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+  white-space: nowrap;
+}
+
+.btn.is-primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  padding: 12px 18px;
+  border-radius: var(--r-md);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.btn.is-primary:hover {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.18);
+}
+
+.btn.is-primary:active {
+  transform: translateY(0);
+}
+
+.btn.is-primary.is-full {
+  width: 100%;
+}
+
+.btn.is-primary.is-chunky {
+  padding: 14px 22px;
+  border-radius: var(--r-lg);
+  font-size: var(--t-base);
+}
+
+.btn.is-secondary {
+  background: transparent;
+  color: var(--accent);
+  padding: 10px 14px;
+  border: 1.5px solid var(--accent-soft);
+}
+
+.btn.is-secondary:hover {
+  background: var(--accent-soft);
+}
+
+.btn.is-text-link {
+  background: transparent;
+  color: var(--accent);
+  padding: 0;
+  font-weight: 600;
+}
+
+.btn.is-text-link:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.btn-chevron::after {
+  content: "›";
+  font-size: 16px;
+  line-height: 1;
+  margin-left: var(--s-1);
+}
+
+
+/* ---------- Pills + tags ---------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  background: var(--bg-card-soft);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  font-size: var(--t-xs);
+  font-weight: 600;
+  border-radius: var(--r-pill);
+  letter-spacing: 0.2px;
+}
+
+.pill.is-accent {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.pill.is-streak {
+  background: color-mix(in srgb, var(--highlight) 25%, white);
+  border: 1.5px solid var(--highlight);
+  color: color-mix(in srgb, var(--highlight) 70%, black);
+}
+
+.pill.is-uppercase {
+  text-transform: uppercase;
+  font-size: var(--t-xs);
+  letter-spacing: 0.6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-card-soft);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  font-size: var(--t-xs);
+  font-weight: 500;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border-soft);
+}
+
+
+/* ---------- Input primitives ---------- */
+
+.input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: var(--t-md);
+  color: var(--text-primary);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--r-md);
+  padding: 6px 6px 6px 14px;
+}
+
+.input-row input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--t-md);
+  padding: 6px 0;
+  outline: none;
+}
+
+
+/* ---------- Bottom nav pattern ---------- */
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--s-2) var(--s-3) calc(var(--s-2) + env(safe-area-inset-bottom, 0));
+  z-index: 10;
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--s-2) var(--s-3);
+  color: var(--text-muted);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.bottom-nav .nav-item.is-active {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  padding: 10px 20px;
+}
+
+.bottom-nav .nav-item:not(.is-active):hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+
+/* ---------- Segmented control / chips ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.chip.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.chip:hover:not(.is-active) {
+  border-color: var(--accent-soft);
+  background: var(--bg-card-soft);
+}
+
+
+/* ---------- Stat / metric blocks ---------- */
+
+.stat-strip {
+  display: grid;
+  gap: var(--s-2);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stat {
+  background: var(--bg-card-soft);
+  border-radius: var(--r-lg);
+  padding: var(--s-4) var(--s-3);
+  text-align: left;
+}
+
+.stat .stat-value {
+  font-size: var(--t-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: var(--lh-tight);
+}
+
+.stat .stat-label {
+  font-size: var(--t-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-top: var(--s-1);
+  font-weight: 600;
+}
+
+
+/* ---------- Progress + score ---------- */
+
+.progress-track {
+  background: var(--bg-card-soft);
+  border-radius: var(--r-pill);
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: var(--accent);
+  height: 100%;
+  border-radius: inherit;
+  transition: width var(--t-slow);
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  background: var(--bg-card-soft);
+  color: var(--text-secondary);
+  font-size: var(--t-md);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.score-badge.is-strong {
+  background: color-mix(in srgb, var(--success) 18%, white);
+  color: var(--success);
+}
+
+.score-badge.is-weak {
+  background: color-mix(in srgb, var(--warning) 18%, white);
+  color: var(--warning);
+}
+
+
+/* ---------- Bubble / message primitives ---------- */
+
+.bubble {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: var(--r-lg);
+  font-size: var(--t-md);
+  line-height: var(--lh-base);
+  animation: bubbleIn 0.28s ease;
+}
+
+.bubble.is-system {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  box-shadow: var(--shadow-soft);
+}
+
+.bubble.is-user {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+}
+
+.bubble.is-insight {
+  background: var(--bg-card);
+  border-left: 3px solid var(--highlight);
+  max-width: 92%;
+  align-self: flex-start;
+  padding: 12px 16px;
+}
+
+
+/* ---------- Animation utilities ---------- */
+
+@keyframes bubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes idleFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+.anim-fade-in   { animation: fadeIn 0.32s ease both; }
+.anim-slide-up  { animation: slideUp 0.36s ease both; }
+.anim-float     { animation: idleFloat 3.2s ease-in-out infinite; }
+.anim-glow      { animation: glowPulse 2.4s ease-in-out infinite; }
+
+
+/* ---------- Online dot ---------- */
+
+.online-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--r-pill);
+  background: var(--success);
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 30%, transparent);
+  animation: glowPulse 2.4s ease-in-out infinite;
+}
+
+
+/* ---------- Avatar primitives ---------- */
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-accent);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  border: 2px solid var(--bg-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.avatar.is-lg {
+  width: 64px;
+  height: 64px;
+  font-size: var(--t-xl);
+}
+
+
+/* ---------- Divider ---------- */
+
+.divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: var(--s-4) 0;
+  border: none;
+}
+
+
+/* ---------- Layout helpers ---------- */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.row.is-between {
+  justify-content: space-between;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.stack > * + * {
+  margin-top: var(--s-3);
+}
+
+
+/* ---------- Sr-only ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
+/* ---------- Selection ---------- */
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+
+/* =================================================================
+   End of scaffold.
+   Built with Manthan by Palash Somani (pAI).
+   ================================================================= */

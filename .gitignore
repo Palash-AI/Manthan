@@ -1,0 +1,8 @@
+outputs/*
+!outputs/.gitkeep
+*.local
+.DS_Store
+node_modules/
+.env
+.claude/settings.local.json
+.claude/worktrees/
