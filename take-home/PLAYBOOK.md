@@ -268,7 +268,7 @@ When all seven modules are done, you have:
 4. **Run `/manthan-1`** with your own idea instead of PM Companion. The sub-agents, gates, and audit work identically.
 5. **Replace the dummy data files** at `reference/sample-data/` with your real data: company context, user calls, etc. (Optional but recommended.)
 
-The workshop's worked example takes 80 minutes. Your own idea will take longer the first time — probably 3-4 hours — because you'll think harder at each gate. That's the point.
+The workshop's worked example takes 60 minutes. Your own idea will take longer the first time — probably 3-4 hours — because you'll think harder at each gate. That's the point.
 
 ---
 

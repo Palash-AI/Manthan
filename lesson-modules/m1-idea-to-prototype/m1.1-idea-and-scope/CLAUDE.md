@@ -27,24 +27,19 @@
 
 "Welcome to Manthan — a workshop by Palash Somani (pAI).
 
-**What Manthan means:** *the churning*. In the old story, gods and demons churned the cosmic ocean and out came poison, treasures, and finally the nectar of immortality. Same idea here. We're going to churn a fuzzy product idea — discard the bad parts, extract what matters, end with something worth building.
+**Manthan = the churning.** In the old story, gods and demons churned the cosmic ocean and out came poison, treasures, and finally the nectar of immortality. Same idea here: we churn a fuzzy product idea — discard the bad, extract what matters, end with something worth building.
 
-**What this workshop is about:** putting structured thinking back into AI-assisted product building.
-
-- AI made shipping fast. Anyone can vibe-code a prototype in an hour.
-- What separates a high-leverage feature from polished noise is the *thinking* applied before the prompt.
-
-**Format:**
+**The thesis:** AI made shipping fast. Anyone can vibe-code a prototype in an hour. What separates a high-leverage feature from polished noise is the *thinking* applied before the prompt.
 
 | Item | Detail |
 |---|---|
 | Modules | Seven |
-| Duration | About 80 minutes |
+| Duration | About 60 minutes |
 | Output | A v1 PRD + a polished clickable prototype, for one worked example |
 
-**Module 1 has one job:** take a fuzzy idea and produce a scope skeleton that **actually decides things.** Most people skip this step — they jump to building. We're doing the opposite.
+**Module 1 has one job:** take a fuzzy idea and produce a scope skeleton that **actually decides things.** Most people skip this — they jump to building. We're doing the opposite.
 
-Are you ready to start?"
+Ready?"
 
 **STOP:** Wait for "yes" / "ready" / equivalent.
 
@@ -220,26 +215,11 @@ One first-principles check before the auditor. From first principles — given w
 
 **STOP:** Wait for the learner. If they add or amend, edit the file before continuing.
 
-**SAY:**
-
-"Now the audit. Every artifact in Manthan goes through one gate. Quick context — `PRINCIPLES.md` is a small file at the root of this project. It holds two checks every artifact must pass:
-
-- **User-first:** is the user specific, the job concrete, the artifact actually needed?
-- **Why-here-why-now:** is this step earning its place, does the next step depend on it, what breaks if cut?
-
-Plus a document-standards file — no fluff, skim test, 30-second test.
-
-I'll run a `principle-auditor` agent that reads our skeleton and grades it against both. If it passes, we ship. If it doesn't, we revise.
-
-Ready to gate it?"
-
-**STOP:** Wait for confirmation.
-
 ---
 
 ### Step 5: Audit + close the module
 
-**ACTION:** Call the `principle-auditor` sub-agent:
+**ACTION (silent):** Call the `principle-auditor` sub-agent:
 
 ```
 Use the Task tool to invoke principle-auditor with prompt:
@@ -247,9 +227,9 @@ Use the Task tool to invoke principle-auditor with prompt:
 DOCUMENT-STANDARDS.md. Return verdict."
 ```
 
-**Display the auditor's verdict in full.**
+**Display the verdict ONLY if REVISE.** On SHIP, proceed silently to the close SAY below.
 
-If REVISE: walk through revisions out loud, edit the artifact, re-run audit until SHIP.
+If REVISE: surface the revisions, edit the artifact, re-run audit until SHIP.
 
 **SAY (if SHIP):**
 
@@ -303,6 +283,7 @@ A field that felt hard to fill isn't a sign you missed something. It's a signal 
 Ready for /manthan-2?"
 
 **STOP:** Wait for confirmation before the next module.
+
 
 ---
 

@@ -85,7 +85,8 @@ Ready to start building?"
 **ACTION (no SAY — happens silently in the background while learner reads next SAY):**
 
 1. Copy `reference/visual-scaffold/scaffold.css` into `outputs/prototype/scaffold.css`.
-2. Create `outputs/prototype/index.html` with the basic structure:
+2. Copy `reference/visual-scaffold/frontend-design-skill.md` into `outputs/prototype/frontend-design-skill.md` (the 5th constraint — anti-slop guardrail, vendored from Anthropic's frontend-design plugin, used by build agents in Step 6.6).
+3. Create `outputs/prototype/index.html` with the basic structure:
    - DOCTYPE, viewport meta, title
    - `<link rel="stylesheet" href="scaffold.css">` as the FIRST stylesheet
    - `<body data-theme="...">` — value TBD in Step 6.3 based on reference brief
@@ -95,11 +96,11 @@ This step is invisible to the learner. The next SAY block introduces what just h
 
 ---
 
-### Step 6.3: Reference visual study (~2 min)
+### Step 6.3: Reference visual study (~1 min)
 
 **SAY:**
 
-"One short, high-leverage step before any screen gets built. Our reference brief from Module 5 said *'Feels like [X]'s [Y]'*. If we leave build agents to guess what [X] looks like, we get generic SaaS. So we read 5-7 specific visual patterns and bake them in. Watch."
+"Quick visual study. The sub-agent reads Module 5's locks (reference, tone, palette) and picks 5-7 visual moves to borrow + applies the palette to the scaffold."
 
 **ACTION:** Call the visual-study sub-agent:
 
@@ -108,27 +109,35 @@ Use the Task tool to invoke a sub-agent with prompt:
 "Read outputs/m1.5-direction-brief.md and 
 reference/visual-scaffold/reference-patterns.md.
 
-1. Identify the reference brief (look for 'Feels like X's Y').
-2. Find the matching entry in reference-patterns.md.
-3. From that entry's 7 visual patterns, pick the 5-7 most relevant 
+1. Identify the reference brief (look for 'Feels like X's Y' in §1).
+2. Read the LOCKED aesthetic tone from §1.5 (use it verbatim — 
+   do not re-interpret).
+3. Read the LOCKED palette from §1.5.5 (4 hex values + visual 
+   references — use them verbatim, do not re-derive).
+4. Find the matching entry in reference-patterns.md for the 
+   reference brief.
+5. From that entry's 7 visual patterns, pick the 5-7 most relevant 
    for OUR product's 4 screens. For each, write a one-line 
    'how it'll show up in OUR build.'
-4. Confirm the scaffold.css data-theme to set on <body>.
-5. Confirm the voice register summary (3-4 bullets).
+6. Set the scaffold.css data-theme on <body> — either use a 
+   matching pre-baked theme, OR inject a custom :root block in 
+   scaffold.css using the locked hex values from §1.5.5.
+7. Confirm the voice register summary (3-4 bullets).
 
 If the reference doesn't match any entry in reference-patterns.md, 
 produce a bespoke 7-pattern list following the same structure 
 (visual moves + voice + anti-patterns) using your knowledge of 
-that reference product.
+that reference product. Always honour the locked palette.
 
-Output everything as `outputs/m1.6-visual-study.md`."
+Output everything as `outputs/m1.6-visual-study.md`. Include a 
+'Palette source: m1.5 §1.5.5 (locked)' line at the top."
 ```
 
-**Display the visual-study output in full.** Then set `<body data-theme="...">` in `outputs/prototype/index.html` to the confirmed theme.
+**Display a compact summary of the visual-study output** (the 5-7 visual moves as a short bullet list — full file at `outputs/m1.6-visual-study.md`). Then set `<body data-theme="...">` in `outputs/prototype/index.html` to the confirmed theme.
 
 **SAY:**
 
-"Now the build agents have 5-7 specific visual moves to borrow, a theme preset, and a voice register. The scaffold already gave them the phone frame, design tokens, and component primitives. We're constraining quality from multiple angles before any HTML gets written."
+"Build agents now have visual moves, a theme preset, and voice register — compounding constraints before any HTML gets written."
 
 **STOP:** Wait for confirmation.
 
@@ -253,11 +262,7 @@ The build agents now have specs to execute, not screens to invent. That's the di
 
 **SAY:**
 
-"One more 2-minute step before we build. Voice rules.
-
-Polished prototypes have consistent voice. Every label, every title, every button reads like it came from the same writer. Bland prototypes have copy that drifts — formal here, casual there, marketing-y in one place, technical in another.
-
-The visual study from Step 6.3 already gave us a voice register summary. Let's lock 3 specific rules for this build."
+"Voice rules — 3 lines that stop build agents from drifting on copy. Consistent voice is the cheapest polish move in product."
 
 **ACTION:** Append to `outputs/m1.6-visual-study.md`:
 
@@ -277,7 +282,7 @@ Examples of correct vs incorrect copy:
 
 **SAY:**
 
-"Three rules. One page. Build agents read this and stop drifting. Voice consistency is the cheapest polish move in product."
+"Locked. Build agents read this and stop drifting."
 
 **STOP:** Wait for confirmation.
 
@@ -287,7 +292,7 @@ Examples of correct vs incorrect copy:
 
 **SAY:**
 
-"Now we build. Scaffold and shell are already in place from Step 6.2. I'll spawn 4 parallel sub-agents — one per screen — each inheriting scaffold + visual-study patterns + per-screen spec + voice rules. Four constraints compounding.
+"Now we build. Scaffold and shell are already in place from Step 6.2. I'll spawn 4 parallel sub-agents — one per screen — each inheriting scaffold + visual-study patterns + per-screen spec + voice rules + the aesthetic tone we locked in Module 5 + Anthropic's frontend-design anti-slop guardrail. **Six constraints compounding** — and the last two are specifically designed to stop AI from defaulting to generic visuals.
 
 Same parallel pattern as Module 2's research — different output shape. There the streams converged into a synthesis; here they converge into one HTML file with four sections."
 
@@ -301,8 +306,10 @@ Task 4 — Build Screen 4 (Progress / [name])
 
 Each task receives the following context:
 - @outputs/prototype/scaffold.css (the visual scaffold inherited)
+- @outputs/m1.5-direction-brief.md Section 1.5 (locked aesthetic tone + implications)
 - @outputs/m1.6-visual-study.md (reference patterns + voice rules)
 - @outputs/prototype/SCREEN-SPEC.md (THIS screen's spec only)
+- @outputs/prototype/frontend-design-skill.md (anti-slop visual guardrail)
 
 Each task must:
 1. Construct semantic HTML for this screen INSIDE the phone wrapper.
@@ -317,10 +324,29 @@ Each task must:
 7. Add `<script>` for any state toggles needed (case state, screen 
    nav, etc.) — keep JS minimal but functional.
 8. Use bottom-nav from scaffold for screen navigation.
+9. Honour the locked aesthetic tone from Module 5 Section 1.5:
+   - Typography family: as specified in the tone lock (e.g., serif 
+     display for editorial, rounded sans for playful, monospace for 
+     brutalist) — match via scaffold's --font-display and --font-body.
+   - Colour register: as specified (cream + muted accent for organic, 
+     high-contrast for luxury, etc.) — use scaffold theme tokens.
+   - Spacing density: as specified (generous for editorial, compact 
+     for industrial, etc.).
+   - Decoration budget: as specified — do not exceed it.
+10. Honour the frontend-design anti-slop constraints:
+   - No Inter / Roboto / Arial / system-font defaults — inherit 
+     scaffold's --font-display and --font-body tokens.
+   - No purple gradient on white. No Space Grotesk default.
+   - Commit fully to the locked tone — do NOT hedge toward generic 
+     SaaS. If the tone is brutally minimal, no decoration. If 
+     maximalist, no timid spacing. Bold execution of the chosen 
+     extreme is the rule.
+   - Use CSS variables for theme; no hard-coded colour values.
 
 Output: the screen's HTML block, ready to be inserted into 
-outputs/prototype/index.html. Plus a 3-line summary of which 
-visual patterns + voice rules got applied.
+outputs/prototype/index.html. Plus a 4-line summary of which 
+visual patterns + voice rules + aesthetic-tone implications + 
+frontend-design guardrails got applied.
 ```
 
 When all four return, **merge their HTML blocks into `outputs/prototype/index.html`** under `<main class="scroll">` with each screen in a `<section data-screen="N" hidden>` wrapper. Add a small `showScreen(n)` JS function for nav switching.
@@ -377,6 +403,8 @@ Reference: [from direction brief]
 | Copy register | [e.g., encouraging, short] | [observed] | ... | ... |
 | Hero element | [e.g., streak-as-hero, day-card center] | [observed] | ... | ... |
 | Animation | [e.g., gentle idle, celebration on completion] | [observed] | ... | ... |
+| Aesthetic tone fidelity | [from m1.5 §1.5 — e.g., "brutally minimal + Notion-warmth accent"] | [observed — does the build commit fully, or hedge?] | ... | ... |
+| Default-slop check | No Inter / Roboto / Arial / Space Grotesk / system-font · no purple-gradient-on-white · committed aesthetic direction | [observed — list any remnants] | ... | ... |
 ```
 
 Identify the **top 2-3 drift items.** For each, write a targeted edit instruction.
@@ -397,11 +425,9 @@ In a real Manthan run on your own idea, you'd repeat this loop 3-5 times. Each p
 
 **SAY:**
 
-"Now the review. Five lenses. We apply each one to what we just built.
+"Five-lens review. Strengths AND v1.1 fixes per lens. The fixes flow into the Module 4 priority queue with measurable triggers."
 
-Different from a generic 'looks good' check — this catalogs both strengths AND specific v1.1 fixes per lens. The weaknesses don't go in the trash; they go into the priority queue from Module 4 with measurable triggers."
-
-**ACTION:** Walk through each lens out loud. Display as a table:
+**ACTION:** Fill and display the table in ONE go — no per-lens walk-through:
 
 ```
 ## 5-Lens Review of v1 prototype
@@ -415,11 +441,7 @@ Different from a generic 'looks good' check — this catalogs both strengths AND
 | System | Could a v1 build be built from this? | [concrete element] | [concrete element] | [trigger + fix] |
 ```
 
-Each weakness gets a v1.1 fix entry: WHEN to revisit (measurable trigger) + WHAT to do.
-
-**SAY:**
-
-"Notice we name *both* strengths AND v1.1 fixes. The strengths are what we don't break in v2. The fixes go into the priority queue with measurable triggers — the same discipline from Module 4."
+Each weakness has a v1.1 fix entry: WHEN to revisit (measurable trigger) + WHAT to do.
 
 **STOP:** Wait for confirmation.
 
@@ -456,11 +478,24 @@ on the artifact set as a whole."
 
 **Display verdict.** If REVISE: walk through, edit, re-run.
 
+**ACTION (silent — no SAY, no narration):** Invoke the `handoff-syncer` sub-agent.
+
+```
+Use the Task tool to invoke handoff-syncer with prompt:
+"Generate the audience-specific handoff files from the Manthan artifact set
+per HANDOFF-STANDARDS.md. Sync at end of /manthan-6 (Phase 1). Read all
+outputs/m1.*.md files plus outputs/prototype/. Write outputs/handoffs/
+handoff-pm.md, handoff-designer.md, handoff-tech.md, and handoff-ai-eng.md
+(only if m1.5 has a populated AI Surface Map). Return one-line status."
+```
+
+The syncer is silent and deterministic. Display nothing from the invocation except — if and only if it returns `SYNC BLOCKED` — a one-line note to the learner and proceed. On clean `SYNC: complete`, continue straight to the closing SAY. Do NOT print the syncer's status block.
+
 **SAY (if SHIP):**
 
 "Cleared. The artifact set is internally consistent. Every decision in the prototype traces back to a decision in Modules 1-5.
 
-**What we have right now — your v1 PRD:**
+**What we have right now — your v1 PRD + audience-specific handoffs:**
 
 | Module | Artifact |
 |---|---|
@@ -474,6 +509,17 @@ on the artifact set as a whole."
 | Module 6 (output) | Working clickable prototype with one iteration pass |
 | Module 6 (final) | 5-lens review with v1.1 fix queue |
 
+**Plus four audience-specific handoffs, ready to share** (at `outputs/handoffs/`):
+
+| File | Share with |
+|---|---|
+| `handoff-pm.md` | Your PM peers / leadership |
+| `handoff-designer.md` | Your designer |
+| `handoff-tech.md` | Your frontend / build engineer |
+| `handoff-ai-eng.md` | Your AI / ML engineer (generated only if AI surfaces exist) |
+
+Each is consulting-grade, audience-shaped, ~5-6 min read. No prep needed — they're ready to forward.
+
 The discipline you saw — the sequence, the gates, the cuts, the audit — is reproducible on your own ideas. At this point, you can hand off this document set for your designer and engineer to build on.
 
 **Three things to leave with:**
@@ -482,7 +528,21 @@ The discipline you saw — the sequence, the gates, the cuts, the audit — is r
 2. *Parallel when scope is clear, sequential when it isn't.* One of the very strong leverages of Claude Code, even beyond prototyping.
 3. *All the artifacts (the structured documents) together form your PRD.*
 
-Thank you for the 80 minutes. The take-home lives at `take-home/`. Module 1 of your own idea is one `/manthan-1` away."
+Thank you for the 60 minutes. The take-home lives at `take-home/`. Module 1 of your own idea is one `/manthan-1` away."
+
+
+### Final Step: Project-principle reflection (silent → surface only if a candidate clears the gate)
+
+**INTERNAL — do not announce. Runs between the audit SHIP and the closing SAY of the previous step.**
+
+After `principle-auditor` returns SHIP for this module's artifact AND BEFORE the module's closing "Ready for next module?" / wrap-up SAY block above, silently run the reflection protocol defined in `@lesson-modules/SHARED-REFLECTION-STEP.md`.
+
+| Outcome | Action |
+|---|---|
+| 0 candidates clear the 2-of-3 gate | Produce ZERO output. Move straight to the closing SAY. |
+| 1+ candidates clear the gate | Surface ONE at a time using the prompt template in SHARED-REFLECTION-STEP.md. Max 2 per module. Handle the learner's response (a / r / edit) per protocol. Run the conflict check (PRINCIPLES.md never edited by the flow) before any save. |
+
+**Hard rule:** Zero candidates = zero output. The learner does not see "I scanned and found nothing." Silent end.
 
 ---
 

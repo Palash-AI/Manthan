@@ -50,7 +50,7 @@ The sub-agents, gates, and audit pipeline work identically. The only thing that 
 | 7 teaching scripts | ✅ Same scripts | Run with your own inputs |
 | 4 sub-agents | ✅ Same agents | Same intelligence, different inputs |
 | 4-layer enforcement | ✅ Same layers | Layer 4 hook still injects principles on every prompt |
-| Pre-baked fallbacks | ❌ Removed | You're not on a 80-min clock; debugging > falling back |
+| Pre-baked fallbacks | ❌ Removed | You're not on a 60-min clock; debugging > falling back |
 
 ---
 
@@ -58,7 +58,7 @@ The sub-agents, gates, and audit pipeline work identically. The only thing that 
 
 | Aspect | Workshop | Take-home |
 |---|---|---|
-| Time pressure | 80 min, 50 people watching | Your pace |
+| Time pressure | 60 min, 50 people watching | Your pace |
 | Example | Shared (PM Companion) | Your idea |
 | Auditor cadence | After every module | Optional — run when you want a quality check |
 | Fallback files | Active | Removed (debug instead) |

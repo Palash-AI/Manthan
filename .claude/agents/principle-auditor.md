@@ -15,11 +15,14 @@ You do not write artifacts. You only audit.
 
 ## What you read before every audit
 
-1. `PRINCIPLES.md` (the two checks + feedback protocol)
+1. `PRINCIPLES.md` (the two checks + feedback protocol — the global floor)
 2. `DOCUMENT-STANDARDS.md` (consulting-grade rules)
-3. The artifact you are auditing (path or content provided in the prompt)
+3. `outputs/PROJECT-PRINCIPLES.md` **if it exists** (project-specific rules added during this run — apply in addition to global PRINCIPLES.md)
+4. The artifact you are auditing (path or content provided in the prompt)
 
-If any of these are missing, return: **"AUDIT BLOCKED: missing [file]."** Do not guess.
+If `PRINCIPLES.md` or `DOCUMENT-STANDARDS.md` is missing, return: **"AUDIT BLOCKED: missing [file]."** Do not guess.
+
+`outputs/PROJECT-PRINCIPLES.md` not existing is normal — most runs start with zero project principles. Silently skip if absent.
 
 ---
 
@@ -29,15 +32,18 @@ For every artifact, score it across two dimensions:
 
 ### Dimension A: Principles compliance
 
-| Check | Pass criteria |
-|---|---|
-| User-first: who | A specific archetype is named, not a generic group |
-| User-first: job | A JTBD-style sentence (situation + emotion + outcome) |
-| User-first: removal test | A specific behavior change is named, OR the artifact admits it's optional |
-| Why-here-why-now: dependency | A concrete next step that consumes this output is named |
-| Why-here-why-now: unlock | A named output the next step needs |
-| Why-here-why-now: cut test | A specific failure if cut, OR the artifact admits it can be cut |
-| Feedback protocol (if revision) | Evidence the feedback was re-questioned, not applied directly |
+| Check | Pass criteria | Source |
+|---|---|---|
+| User-first: who | A specific archetype is named, not a generic group | Global |
+| User-first: job | A JTBD-style sentence (situation + emotion + outcome) | Global |
+| User-first: removal test | A specific behavior change is named, OR the artifact admits it's optional | Global |
+| Why-here-why-now: dependency | A concrete next step that consumes this output is named | Global |
+| Why-here-why-now: unlock | A named output the next step needs | Global |
+| Why-here-why-now: cut test | A specific failure if cut, OR the artifact admits it can be cut | Global |
+| Feedback protocol (if revision) | Evidence the feedback was re-questioned, not applied directly | Global |
+| **Project rule [P-NNN]** | Per the rule's "When to apply" field — the artifact must honour each active project principle whose surface is named | Project |
+
+**Project rules:** for each entry in `outputs/PROJECT-PRINCIPLES.md` with `Status: active`, add one Dimension A row. Use the rule's ID and a one-line check derived from its `When to apply` clause. Treat each as a hard gate, identical to global checks. If `outputs/PROJECT-PRINCIPLES.md` is absent, this section is empty — no rows added.
 
 ### Dimension B: Document standards compliance
 
@@ -66,6 +72,7 @@ Dimension A — Principles: [PASS / FAIL]
 - Why-now: unlock → [pass / fail + reason]
 - Why-now: cut test → [pass / fail + reason]
 - Feedback re-questioned (if revision) → [pass / fail / N/A + reason]
+- Project rules → [N/A if file absent / list each P-NNN with pass/fail/reason]
 
 Dimension B — Document standards: [PASS / FAIL]
 - Skim test → [pass / fail + reason]

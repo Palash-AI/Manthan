@@ -37,38 +37,28 @@ Are you ready?"
 
 ---
 
-### Step 2: Frame the three sources
+### Step 2: Spawn three parallel agents
 
 **SAY:**
 
-"Good research draws from three sources:
+"Now the capability that earns this module its time: **parallel sub-agents.**
 
-1. **Web research** — public user voice (Reddit, X, app reviews, communities), competitive scans, market signals.
-2. **Company data** — what your team already knows. Internal surveys, founder hypotheses, sales notes, support tickets.
-3. **User calls** — verbatim transcripts from real conversations with target users.
+Good research draws from three sources, run in parallel:
 
-In a real Manthan run on your own product, all three run live in parallel. For today's workshop time budget, I've pre-cached the web research using actual searches run yesterday — the agent reads the cached result instead of doing live search. The capability we're showing is the parallel spawn; the searches themselves are pre-run for time. The other two streams read from sample data files.
+1. **Web research** — public user voice (Reddit, X, app reviews), competitive scans, market signals.
+2. **Company data** — what your team already knows. Internal surveys, founder hypotheses, sales notes.
+3. **User calls** — verbatim transcripts from real conversations.
 
-Make sense?"
-
-**STOP:** Wait for confirmation.
-
----
-
-### Step 3: Spawn three parallel agents
-
-**SAY:**
-
-"Now the capability that earns this module its 11 minutes: **parallel sub-agents.**
+For today's time budget, web research is pre-cached from yesterday's actual searches — the parallel-spawn capability is what we're showing.
 
 | When work is... | You should... |
 |---|---|
 | Breakable into independent streams | Run them in **parallel** |
 | Dependent — each step needs the prior | **Sequence** them |
 
-Research is the cleanest example of parallel stream work — three sources, three streams, no interdependence.
+Research is the cleanest parallel example — three sources, three streams, no interdependence.
 
-Watch this. I'm going to spawn three `manthan-researcher` agents in a single message. They'll run simultaneously — three streams, not one after another."
+Watch this. I'm spawning three `manthan-researcher` agents in a single message. They'll run simultaneously."
 
 **ACTION:** In a SINGLE message, spawn three Task tool calls in parallel:
 
@@ -107,40 +97,42 @@ While agents run, **SAY:**
 
 ---
 
-### Step 4: Display all three outputs
+### Step 3: Display all three outputs (compact)
 
-**ACTION:** When all three agents return, display each output clearly labelled:
+**ACTION:** When all three agents return, display a **compact summary** of each — not the full output. For each stream, show: top 3–5 findings as bullets + 1 verbatim quote (where applicable). Full outputs remain in agent memory and feed Step 4's synthesis untouched.
 
 ```
 === Stream A: Web (User Voice Extractor) ===
-[Output from Task 1]
+- [Finding 1]
+- [Finding 2]
+- [Finding 3]
+Verbatim: "[quote]"
 
 === Stream B: Company Context ===
-[Output from Task 2]
+- [Finding 1]
+- [Finding 2]
+- [Finding 3]
 
 === Stream C: User Call Transcripts ===
-[Output from Task 3]
+- [Finding 1]
+- [Finding 2]
+- [Finding 3]
+Verbatim: "[quote]"
 ```
 
 **SAY:**
 
-"Three streams, three angles. Each one has things the others don't:
+"Three streams, three angles. Web = what users say publicly. Company = what your team already believes. User calls = what users said when nobody else was listening.
 
-| Stream | What it reveals |
-|---|---|
-| Web | What users say in public |
-| Company context | What your team already believes |
-| User calls | What users said when nobody else was listening |
+The insight is at the **intersection** — agreement = signal, disagreement = question to investigate.
 
-The real insight is at the **intersection** — where two or three streams agree, you have signal. Where they disagree, you have a question worth investigating.
-
-Want to synthesise them now?"
+The synthesis next is where this turns into something you can act on. Ready?"
 
 **STOP:** Wait for confirmation.
 
 ---
 
-### Step 5: Synthesise the three streams
+### Step 4: Synthesise the three streams
 
 **ACTION:** Use the `Write` tool to create `outputs/m1.2-research-synthesis.md`. Structure:
 
@@ -183,7 +175,7 @@ Want to synthesise them now?"
 
 ---
 
-### Step 6: Run the principles check
+### Step 5: Run the principles check
 
 **SAY:**
 
@@ -191,11 +183,7 @@ Want to synthesise them now?"
 
 **STOP:** Wait for the learner. If they add or amend, edit the file.
 
-**SAY:**
-
-"Now principle-auditor."
-
-**ACTION:** Call the `principle-auditor`:
+**ACTION (silent):** Call the `principle-auditor`:
 
 ```
 Use the Task tool to invoke principle-auditor with prompt:
@@ -203,31 +191,20 @@ Use the Task tool to invoke principle-auditor with prompt:
 and DOCUMENT-STANDARDS.md. Return verdict."
 ```
 
-**Display verdict.** If REVISE, walk through revisions, edit, re-run. If SHIP, proceed.
-
-**SAY (if SHIP):**
-
-"Cleared the gate. The synthesis is now the input for Module 3, where we turn convergent themes into archetypes and the JTBD grid.
-
-One quick thing before we move on."
-
-**STOP:** Wait for confirmation.
+**Display verdict ONLY if REVISE.** On SHIP, proceed silently to Step 6.
 
 ---
 
-### Step 7: Close the module
+### Step 6: Close the module
 
 **SAY:**
 
-"Quick wrap.
-
-The capability you saw — parallel sub-agents — is the highest-leverage Claude Code move for any research-heavy work. Deal review, market sizing, competitive teardown, pre-meeting briefing. Anywhere the work decomposes into independent streams, parallelise.
-
-The discipline you saw — three sources, verbatim language, convergence-divergence framing — is how you get the most out of research; and parallelising work further increased speed.
+"Parallel sub-agents — the highest-leverage Claude Code move for any research-heavy work: deal review, market sizing, competitive teardown, pre-meeting briefing. Anywhere work decomposes into independent streams, parallelise.
 
 Ready for /manthan-3?"
 
 **STOP:** Wait for confirmation.
+
 
 ---
 

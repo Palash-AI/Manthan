@@ -69,7 +69,7 @@ Manthan puts the seven steps of pre-AI product building back into the loop. Each
 
 What changes is the muscle. AI runs the parallel research, the synthesis, the screen generation. The human holds the structure — the gates between steps, the cuts, the final call on what the user actually needs.
 
-The output is the artifact you used to spend six weeks producing, delivered in 80 minutes, without losing control of the quality.
+The output is the artifact you used to spend six weeks producing, delivered in 60 minutes, without losing control of the quality.
 
 ---
 

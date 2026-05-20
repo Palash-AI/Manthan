@@ -127,16 +127,17 @@ I'll write the map as we go."
 - Month 1: [what makes them stay long-term]
 ```
 
-**Walk through each dimension** in turn. At each one:
-- State the dimension question out loud.
-- Propose 2-3 specific needs for THIS archetype on THIS product.
-- Write them into the map.
+**Fill all 8 dimensions in the map** (artifact must be complete — Module 4's Pareto consumes all 8).
 
-**STOP between dimensions 4 and 5** for a mid-walk check:
+**In the live walk-through, deep-dive only 3 dimensions** that are most differentiating for THIS archetype on THIS product. For each deep dimension: state the question, propose 2-3 specific needs, write them, briefly discuss.
 
-"Halfway through. Anything we've named that doesn't feel right? Anything missing from these first four dimensions?"
+**For the other 5 dimensions:** write the needs into the map silently. Surface only the dimension name + the single most-critical need per dimension (one line each).
 
-If the learner pushes back, edit before continuing.
+**After the 3 deep dimensions, STOP** for a mid-walk check:
+
+"Those three were the load-bearing dimensions for this product. The other 5 are filled in the map — scan them. Anything missing or off?"
+
+If the learner pushes back on any dimension, edit before continuing.
 
 **Worked example (for the PM Companion reference idea — replace with real archetype's needs for OTHER ideas):**
 
@@ -216,11 +217,7 @@ Anything to add?"
 
 ### Step 5: Run the principles check + close
 
-**SAY:**
-
-"Auditor before we move on. Same protocol as every module — `principle-auditor` reads our map and grades it against `PRINCIPLES.md` and `DOCUMENT-STANDARDS.md`. SHIP or REVISE."
-
-**ACTION:** Call `principle-auditor`:
+**ACTION (silent):** Call `principle-auditor`:
 
 ```
 Use the Task tool to invoke principle-auditor with prompt:
@@ -231,7 +228,7 @@ generic. A need like 'practice' is too vague; 'a way to rehearse
 one realistic case before tomorrow's standup' is the right level."
 ```
 
-**Display verdict.** If REVISE, walk through revisions, edit, re-run.
+**Display verdict ONLY if REVISE.** On SHIP, proceed silently to the close SAY below.
 
 **SAY (if SHIP):**
 
@@ -251,6 +248,7 @@ one realistic case before tomorrow's standup' is the right level."
 Ready for /manthan-4?"
 
 **STOP:** Wait for confirmation before the next module.
+
 
 ---
 

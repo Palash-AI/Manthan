@@ -28,7 +28,7 @@
 
 The take-home runs at the learner's pace. There's no time pressure. If an agent stalls, the learner waits or restarts. No fallback needed.
 
-The workshop has 80 minutes and 50+ people watching. A stall is a different problem. Fallbacks solve it.
+The workshop has 60 minutes and 50+ people watching. A stall is a different problem. Fallbacks solve it.
 
 ---
 

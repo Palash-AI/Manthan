@@ -166,7 +166,21 @@ sentence, emotional driver, anti-archetype (who this person is NOT), and
 2 verbatim quotes from the research as evidence."
 ```
 
-**Display the archetypes returned.** Append to `outputs/m1.3-jtbd-archetypes.md`.
+**Append all 4 archetypes (full detail) to `outputs/m1.3-jtbd-archetypes.md`.**
+
+**Display in chat:** show the 3 most differentiating archetypes in full. For the 4th, show only name + one-line primary JTBD + a pointer that the full entry is in the file. This compresses live walk-through without reducing the artifact. The downstream Pareto and Direction Brief still consume all 4 from the file.
+
+Example compressed display:
+
+```
+### Archetype 1: [name]  — full detail
+### Archetype 2: [name]  — full detail
+### Archetype 3: [name]  — full detail
+
+### Archetype 4: [name]
+Primary JTBD: "[one-line JTBD]"
+*(Full archetype in outputs/m1.3-jtbd-archetypes.md.)*
+```
 
 Worked-example archetypes (what should land):
 
@@ -231,11 +245,7 @@ In Module 4 we'll Pareto-cut features against these archetypes — 'does this fe
 
 **STOP:** Wait for the learner. If they add or amend, edit the file.
 
-**SAY:**
-
-"Now the auditor."
-
-**ACTION:** Call `principle-auditor`:
+**ACTION (silent):** Call `principle-auditor`:
 
 ```
 Use the Task tool to invoke principle-auditor with prompt:
@@ -243,7 +253,7 @@ Use the Task tool to invoke principle-auditor with prompt:
 DOCUMENT-STANDARDS.md. Return verdict."
 ```
 
-**Display verdict.** If REVISE: walk through, edit, re-run. If SHIP: proceed.
+**Display verdict ONLY if REVISE.** On SHIP, proceed silently to the close SAY below.
 
 **SAY (if SHIP):**
 
@@ -257,6 +267,7 @@ DOCUMENT-STANDARDS.md. Return verdict."
 Ready for /manthan-4 — the Pareto cut?"
 
 **STOP:** Wait for confirmation.
+
 
 ---
 

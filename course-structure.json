@@ -4,7 +4,7 @@
   "owner": "Palash Somani (pAI)",
   "version": "1.0.0",
   "lastUpdated": "2026-05-10",
-  "duration": "80 minutes",
+  "duration": "60 minutes",
   "format": "Live, not recorded. One worked example. Web research pre-cached (parallel-agent capability preserved).",
   "core_question": "What does this user need to succeed at this job? — asked with discipline across the chain.",
   "modules": [

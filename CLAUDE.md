@@ -10,11 +10,21 @@
 
 Before producing ANY substantive output in this project, you must:
 
-1. **Read `@PRINCIPLES.md`** — the two checks (user-first, why-here-why-now) and the feedback protocol.
+1. **Read `@PRINCIPLES.md`** — the two checks (user-first, why-here-why-now) and the feedback protocol. The global floor.
 2. **Read `@DOCUMENT-STANDARDS.md`** — the consulting-grade rules for every artifact.
 3. **Read `@.claude/SCRIPT_INSTRUCTIONS.md`** — the no-fourth-wall rules for `/manthan-N` modules.
-4. **Run the checks silently.** State the answers in your reasoning before producing the artifact.
-5. **For high-stakes outputs in direct conversation with Palash** (drafts, plans, critiques), lead with: "Applied principles: [user-first answer] / [why-now answer] / [feedback re-questioned: yes/no]."
+4. **Read `@PROJECT-PRINCIPLES-SCHEMA.md`** — the contract for project-specific principles (loaded automatically when present at `outputs/PROJECT-PRINCIPLES.md`).
+5. **Run the checks silently.** State the answers in your reasoning before producing the artifact.
+6. **For high-stakes outputs in direct conversation with Palash** (drafts, plans, critiques), lead with: "Applied principles: [user-first answer] / [why-now answer] / [feedback re-questioned: yes/no]."
+
+**Two principle layers — both are gates:**
+
+| Layer | File | Edited by |
+|---|---|---|
+| Global | `PRINCIPLES.md` | User only, manually, outside any flow. **Never edited by Manthan.** |
+| Project | `outputs/PROJECT-PRINCIPLES.md` | Reflection step at end of the workshop (after m1.6), only on user approval. |
+
+If `outputs/PROJECT-PRINCIPLES.md` exists, its contents auto-load via the UserPromptSubmit hook and apply alongside global principles. `principle-auditor` audits against both.
 
 **Inside `/manthan-N` flows: principles run silently.** No "Applied principles" declaration. No file-load narration. The learner sees the lesson, not the backend.
 
@@ -72,15 +82,17 @@ Manthan-the-skill maps that arc onto product building:
 manthan/
 ├── README.md                          ← public-facing intro
 ├── CLAUDE.md                          ← this file
-├── PRINCIPLES.md                      ← the two checks + feedback protocol
+├── PRINCIPLES.md                      ← the two checks + feedback protocol (global, sacred)
 ├── DOCUMENT-STANDARDS.md              ← consulting-grade rules
+├── PROJECT-PRINCIPLES-SCHEMA.md       ← contract for project-specific principles
 ├── GLOSSARY.md                        ← 15 product-lens terms (Swiggy examples)
 ├── course-structure.json              ← module manifest
 ├── .claude/
 │   ├── commands/                      ← /manthan-1 ... /manthan-6
 │   ├── agents/                        ← researcher, jtbd-synthesizer, scope-editor, principle-auditor
-│   └── settings.json                  ← UserPromptSubmit hook (Layer 4 enforcement)
+│   └── settings.json                  ← UserPromptSubmit hook (loads global + project principles)
 ├── lesson-modules/
+│   ├── SHARED-REFLECTION-STEP.md      ← end-of-workshop project-principle reflection protocol (runs once after m1.6)
 │   └── m1-idea-to-prototype/
 │       ├── m1.1-idea-and-scope/CLAUDE.md
 │       ├── m1.2-research/CLAUDE.md
@@ -91,6 +103,7 @@ manthan/
 │       └── m1.6-build-prototype/CLAUDE.md
 ├── reference/                         ← pre-baked fallback files (safety nets)
 ├── outputs/                           ← learner artifacts (gitignored)
+│   └── PROJECT-PRINCIPLES.md          ← created lazily on first approval (project-specific rules)
 └── take-home/                         ← post-workshop skill for self-service use
 ```
 

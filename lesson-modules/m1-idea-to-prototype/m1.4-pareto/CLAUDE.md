@@ -57,22 +57,27 @@ Then we Pareto-cut:
 
 I'll write the candidate list now — derived from our User Need Map — then we'll look at it together."
 
-**ACTION:** Read `outputs/m1.3.5-user-need-map.md`. For each user need across the 8 dimensions, propose 1-3 candidate features that could serve it. Compile into a single candidate-feature list. Use the `Write` tool to create `outputs/m1.4-pareto-v1-lock.md` and display its full contents inline:
+**ACTION:** Read `outputs/m1.3.5-user-need-map.md`. For each user need across the 8 dimensions, propose 1-3 candidate features that could serve it. Compile into a single candidate-feature list. Use the `Write` tool to create `outputs/m1.4-pareto-v1-lock.md` containing the FULL list (artifact must be complete — Step 3's scope-editor reads the full file).
+
+**Display in chat: a 5-row PREVIEW + pointer to file** — not the full table. The artifact stays untouched; we just don't dump 25 rows to screen.
 
 ```
 # Pareto v1 Lock — [Product]
 
-## Candidate features (derived from User Need Map)
+## Candidate features (derived from User Need Map) — preview
 
 | # | Feature | Serves user need(s) from M3.5 |
 |---|---|---|
 | 1 | [Feature] | Trigger (a) + Doing (b) |
 | 2 | [Feature] | Feedback (b) — specificity |
 | 3 | [Feature] | Stuck (a) — hint without giving away |
-| ... | ... | ... |
+| 4 | [Feature] | Progression (a) |
+| 5 | [Feature] | Status (b) |
+
+*(Full list of ~25 candidates in `outputs/m1.4-pareto-v1-lock.md` — Step 3's scope-editor reads them all.)*
 ```
 
-**Generate the full list by walking each of the 8 User Need Map dimensions and proposing features.** Each feature line cites which need(s) it serves. Aim for 20-30 candidates.
+**Generate the full list (~20-30 candidates) by walking each of the 8 User Need Map dimensions and proposing features.** Each feature line cites which need(s) it serves.
 
 **Worked example (for PM Companion reference — replace with real candidates for other ideas):**
 
@@ -192,30 +197,23 @@ table and the v1 lock + deferred priority queue with measurable triggers."
 
 ### Step 4: Sanity-check — does v1 deliver every archetype's loop?
 
-**SAY:**
+**ACTION (silent):** Run the archetype walkthrough internally — for each of the 4 archetypes, verify the v1 cut delivers their primary loop. Write the walkthrough table into `outputs/m1.4-pareto-v1-lock.md` (artifact must include it).
 
-"Before we lock, one sanity check. The v1 cut has to deliver the primary loop for *all four* archetypes — not just the one we designed for. If different archetypes need different features, we're over-scoped."
+**Display in chat ONLY if a gap is found** (any archetype's loop NOT fully delivered by v1). On clean pass, proceed silently to Step 5.
 
-**ACTION:** Display the archetype walkthrough as a table:
+If a gap surfaces, display:
 
 ```
-## Archetype Walkthrough — does v1 deliver each loop?
+## Archetype Walkthrough — gap found
 
 | Archetype | Loop they need | v1 delivers? |
 |---|---|---|
-| **The Anxious Aspirant** | Open companion → case → ask questions → get graded → report → return tomorrow with streak | ✅ Yes — all five v1 features serve this loop directly |
-| **The Ex-Engineer in Crisis** | Practise questioning muscle with feedback on weak questions | ✅ Yes — grader + report card give the feedback they need |
-| **The Self-Improver** | 15-min daily rep with visible progression signal | ✅ Yes — streaks + report card provide the signal |
-| **The Burned-Out Reader** | Replace passive reading with active practice that grades them | ✅ Yes — the case+grader loop *is* the active practice |
+| **[Archetype]** | [loop] | ❌ Missing — [what's needed] |
 ```
 
-**SAY:**
+Then **SAY:** "v1 doesn't fully serve [archetype]. We either add the missing piece or accept that [archetype] is post-v1. Which?"
 
-"Same five v1 features serve all four archetypes. That's the test of a good cut. If different archetypes needed different features, we'd be over-scoped — and we'd cut more.
-
-Lock it."
-
-**STOP:** Wait for confirmation.
+**STOP** for the learner's call. Edit the cut accordingly.
 
 ---
 
@@ -227,11 +225,7 @@ Lock it."
 
 **STOP:** Wait for the learner. If they argue a cut feature back into v1, re-test against the 5-criteria and update the file.
 
-**SAY:**
-
-"Now the auditor."
-
-**ACTION:** Call `principle-auditor`:
+**ACTION (silent):** Call `principle-auditor`:
 
 ```
 Use the Task tool to invoke principle-auditor with prompt:
@@ -240,7 +234,7 @@ DOCUMENT-STANDARDS.md. Pay special attention to whether cuts have
 measurable triggers and whether v1 stays under 6 features."
 ```
 
-**Display verdict.** If REVISE: walk through, edit, re-run. If SHIP: proceed.
+**Display verdict ONLY if REVISE.** On SHIP, proceed silently to the close SAY below.
 
 **SAY (if SHIP):**
 
@@ -261,6 +255,7 @@ measurable triggers and whether v1 stays under 6 features."
 Ready for /manthan-5 — the direction brief?"
 
 **STOP:** Wait for confirmation.
+
 
 ---
 
