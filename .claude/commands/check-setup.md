@@ -12,7 +12,7 @@ done
 for a in manthan-researcher jtbd-synthesizer scope-editor principle-auditor handoff-syncer; do
   [ -f ".claude/agents/${a}.md" ] || { echo "MISSING agent: ${a}"; ok=false; }
 done
-for c in manthan-1 manthan-2 manthan-3 manthan-3-5 manthan-4 manthan-5 manthan-6; do
+for c in manthan-1 manthan-2 manthan-3 manthan-3-5 manthan-4 manthan-5 manthan-6 manthan-pick; do
   [ -f ".claude/commands/${c}.md" ] || { echo "MISSING command: /${c}"; ok=false; }
 done
 for s in SHARED-REFLECTION-STEP; do

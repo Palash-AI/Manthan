@@ -88,8 +88,8 @@ manthan/
 ├── GLOSSARY.md                        ← 15 product-lens terms (Swiggy examples)
 ├── course-structure.json              ← module manifest
 ├── .claude/
-│   ├── commands/                      ← /manthan-1 ... /manthan-6
-│   ├── agents/                        ← researcher, jtbd-synthesizer, scope-editor, principle-auditor
+│   ├── commands/                      ← /manthan-1 ... /manthan-6, /manthan-pick (selective run)
+│   ├── agents/                        ← researcher, jtbd-synthesizer, scope-editor, principle-auditor, handoff-syncer
 │   └── settings.json                  ← UserPromptSubmit hook (loads global + project principles)
 ├── lesson-modules/
 │   ├── SHARED-REFLECTION-STEP.md      ← end-of-workshop project-principle reflection protocol (runs once after m1.6)

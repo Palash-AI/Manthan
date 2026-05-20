@@ -98,6 +98,8 @@ That kicks off Module 1.
 | 5 | `/manthan-5` | Direction brief (reference brief + emotion + AI surfaces with rubric depth) |
 | 6 | `/manthan-6` | Polished Claude Code HTML prototype (with iteration pass) |
 
+**Advanced:** run only specific modules with `/manthan-pick`. Validates dependencies, fills gaps from your inputs, then runs only the picked sequence.
+
 ---
 
 ## After the workshop
